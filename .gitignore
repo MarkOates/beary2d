@@ -1,0 +1,12 @@
+msvc-*/
+*.swp
+
+build/tmp*
+
+*.exe
+obj/*.o
+obj/*.obj
+
+allegro.log
+
+
