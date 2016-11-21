@@ -63,7 +63,7 @@ AssetsScreen::AssetsScreen(Display *display)
 
 void AssetsScreen::primary_timer_func()
 {
-	motion.update(af::time_now);
+	motion.update(Framework::time_now);
 
 	//update_master_motion_control(af::time_now);
 

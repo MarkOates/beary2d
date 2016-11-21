@@ -267,5 +267,5 @@ std::string Entity::get_world_position_str() const
 
 vec2d Entity::get_direction_of_rotation(float magnitude)
 {
-	return vec2d::PolarCoords(place.rotation, magnitude);
+	return vec2d::polar_coords(place.rotation, magnitude);
 }

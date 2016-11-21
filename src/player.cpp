@@ -26,7 +26,7 @@ void Player::primary_timer_func()
 
 	float joy_sensitivity = 20;
 
-	ALLEGRO_JOYSTICK *joystick = af::joystick;//al_get_joystick(0);
+	ALLEGRO_JOYSTICK *joystick = Framework::joystick;//al_get_joystick(0);
 	if (joystick)
 	{
 		ALLEGRO_JOYSTICK_STATE joystick_state;
@@ -46,7 +46,7 @@ void Player::primary_timer_func()
 			{
 				float angle = vec.get_angle();
 				float mag = std::min(1.0f, vec.get_magnitude()) * 0.8;
-				vec = vec2d::PolarCoords(angle, mag);
+				vec = vec2d::polar_coords(angle, mag);
 				//vec = vec.Normalized();
 			}
 			controlling_entity->move_horizontal(vec.x);
@@ -96,7 +96,7 @@ void Player::key_down_func()
 {
 	if (!controlling_entity) return;
 
-	if (af::current_event->keyboard.keycode == ALLEGRO_KEY_SPACE)
+	if (Framework::current_event->keyboard.keycode == ALLEGRO_KEY_SPACE)
 		controlling_entity->activate_skill("jump");
 }
 
