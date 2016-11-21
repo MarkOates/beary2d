@@ -28,9 +28,9 @@ $(CORE_OBJ_FILES): obj/%.o : src/%.cpp
 	g++ -c -std=gnu++11 -o obj/$(notdir $@) $< $(INCLUDE_FLAGS)
 
 clean:
-	rm obj/*.o
-	rm lib/*.a
-	rm bin/*.exe
+	-rm obj/*.o
+	-rm lib/*.a
+	-rm bin/*.exe
 
 all: core examples
 
