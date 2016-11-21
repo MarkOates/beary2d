@@ -4,6 +4,7 @@
 
 #include <allegro_flare/allegro_flare.h>
 
+#include <cmath>
 
 #include <beary2d/globals.h>
 
