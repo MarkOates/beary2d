@@ -19,6 +19,26 @@ should be used in a more proper manner.
 
 
 
+struct int2
+{
+public:
+	int x = 0;
+	int y = 0;
+	int2(int x, int y)
+		: x(x)
+		, y(y)
+	{}
+	void rotate()
+	{
+		int s = x;
+		x = y;
+		y = s;
+	}
+};
+
+
+
+
 //extern int SCREEN_W;
 //extern int SCREEN_H;
 
