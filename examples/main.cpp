@@ -2,6 +2,8 @@
 
 #include <beary2d/beary2d.h>
 
+#include <cmath>
+
 
 
 class Project : public NewWorldScreen
@@ -33,13 +35,13 @@ public:
 	void reposition_camera()
 	{
 		// initiate motion with the camera
-		motion.cmove_to(&camera.placement.position.x, random_float(0, 40*21), 3, interpolator::doubleSlowInOut);
-		motion.cmove_to(&camera.placement.position.y, random_float(0, 20*21), 3, interpolator::doubleSlowInOut);
+		motion.cmove_to(&camera.placement.position.x, random_float(0, 40*21), 3, interpolator::double_slow_in_out);
+		motion.cmove_to(&camera.placement.position.y, random_float(0, 20*21), 3, interpolator::double_slow_in_out);
 	}
 
 	void primary_timer_func() override
 	{
-		motion.update(af::time_now);
+		motion.update(Framework::time_now);
 
 
 		// update the camera's scale and rotation
@@ -64,12 +66,12 @@ public:
 
 int main(int argc, char *argv[])
 {
-	af::initialize();
-	Display *display = af::create_display(800, 600);
+	Framework::initialize();
+	Display *display = Framework::create_display(800, 600);
 
 	NewWorldScreen *world_screen = new Project(display, NULL);
 
-	af::run_loop();
+	Framework::run_loop();
 
 	return 0;
 }
