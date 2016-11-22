@@ -11,7 +11,7 @@
 class Map
 {
 public:
-	std::vector<TileLayer> tile_layers;
+	TileLayer tile_layer;
 	vec2d gravity; // rethink this, ultimately map forces should be zones or tiles
 	Map();
 };

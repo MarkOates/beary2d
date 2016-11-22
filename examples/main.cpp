@@ -25,7 +25,7 @@ public:
       level->maps.push_back(current_map);
 
       tile_index.load_from_atlas(bitmaps["spritesheet.png"], 21, 21, 2, 2, 1, 1);
-      current_map->tile_layers.push_back(TileLayer(&tile_index, 60, 60));
+      current_map->tile_layer = TileLayer(&tile_index, 60, 60);
 
       random_map_fill();
    }
@@ -33,9 +33,9 @@ public:
    void random_map_fill()
    {
       // fill our map with random tiles
-      for (unsigned x=0; x<current_map->tile_layers.back().width; x++)
-         for (unsigned y=0; y<current_map->tile_layers.back().height; y++)
-            current_map->tile_layers.back().set_tile(x, y, random_int(0, 200));
+      for (unsigned x=0; x<current_map->tile_layer.width; x++)
+         for (unsigned y=0; y<current_map->tile_layer.height; y++)
+            current_map->tile_layer.set_tile(x, y, random_int(0, 200));
    }
 
    void update_reposition_camera()
@@ -72,7 +72,7 @@ public:
 int main(int argc, char *argv[])
 {
    Framework::initialize();
-   Display *display = Framework::create_display(800, 600);
+   Display *display = Framework::create_display(800*2, 600*2);
 
    NewWorldScreen *world_screen = new Project(display, NULL);
 

@@ -37,26 +37,22 @@ void NewWorldScreen::render_scene()
 
 	if (current_map)
 	{
-		for (unsigned i=0; i<current_map->tile_layers.size(); i++)
-		{
-			//int tile_width = current_map->tile_layers[i].tile_index->get_tile_width();
-			//int tile_height = current_map->tile_layers[i].tile_index->get_tile_height();
-			//int left = (camera.x+camera.w/2)/tile_width - 8;
-			//int top = (camera.y+camera.h/2)/tile_height - 5;
-			//int right = (camera.x+camera.w/2)/tile_width + 12;
-			//int bottom = (camera.y+camera.h/2)/tile_height + 7;
-			//std::cout << "(" << camera.x << " " << camera.y << " " << camera.w << " " << camera.h << " - " << camera.align_x << " " << camera.align_y << " - " << camera.scale_x << " " << camera.scale_y << ")";
+      //int tile_width = current_map->tile_layers[i].tile_index->get_tile_width();
+      //int tile_height = current_map->tile_layers[i].tile_index->get_tile_height();
+      //int left = (camera.x+camera.w/2)/tile_width - 8;
+      //int top = (camera.y+camera.h/2)/tile_height - 5;
+      //int right = (camera.x+camera.w/2)/tile_width + 12;
+      //int bottom = (camera.y+camera.h/2)/tile_height + 7;
+      //std::cout << "(" << camera.x << " " << camera.y << " " << camera.w << " " << camera.h << " - " << camera.align_x << " " << camera.align_y << " - " << camera.scale_x << " " << camera.scale_y << ")";
 
-			//int left = (camera.x-camera.w*camera.align_x)/tile_width;
-			//int top = (camera.y+camera.h/2)/tile_height;
-			//int right = (camera.x+camera.w/2)/tile_width;
-			//int bottom = (camera.y+camera.h/2)/tile_height;
+      //int left = (camera.x-camera.w*camera.align_x)/tile_width;
+      //int top = (camera.y+camera.h/2)/tile_height;
+      //int right = (camera.x+camera.w/2)/tile_width;
+      //int bottom = (camera.y+camera.h/2)/tile_height;
 
-			current_map->tile_layers[i].draw(); // for now
-			// TODO: a newer version of the beary engine has clip calculations that account for zooming and rotations.
-			// that will need to be updated into this part.
-
-		}
+      current_map->tile_layer.draw(); // for now
+      // TODO: a newer version of the beary engine has clip calculations that account for zooming and rotations.
+      // that will need to be updated into this part.
 	}
 	 
 	entity_manager.draw_all_in_map(current_map);
