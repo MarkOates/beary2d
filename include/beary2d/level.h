@@ -5,7 +5,6 @@
 
 
 #include <vector>
-#include <beary2d/tile_index.h>
 #include <beary2d/map.h>
 
 

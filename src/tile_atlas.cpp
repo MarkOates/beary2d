@@ -2,7 +2,7 @@
 
 
 #include <allegro_flare/color.h>
-#include <beary2d/tile_index.h>
+#include <beary2d/tile_atlas.h>
 
 #include <iostream>
 #include <beary2d/tile.h>
