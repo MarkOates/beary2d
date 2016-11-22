@@ -3,6 +3,13 @@
 
 
 
+#include <vector>
+
+
+
+
+class int2;
+
 class TileMap
 {
 private:
@@ -28,6 +35,7 @@ public:
 	static int world_to_tile(float world_pos);
 
 	static int2 world_to_tile_coords(float world_x, float world_y);
+   std::vector<int2> get_next_collided_tile_coords(float x, float y, float velocity, float depth_of_body, float length_of_edge);
 };
 
 

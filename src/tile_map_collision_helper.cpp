@@ -4,10 +4,15 @@
 
 #include <beary2d/tile_map_collision_helper.h>
 
+#include <cmath>
+#include <beary2d/object.h>
+#include <beary2d/tile_map.h>
+#include <beary2d/tile_map_collision_helper.h>
 
 
 
-static void TileMapCollisionHelper::update_with_world(TileMap &map, Object& obj)
+
+void TileMapCollisionHelper::update_with_world(TileMap &map, Object& obj)
 {
    // test horizontal first
    std::vector<int2> horizontal_collided_blocks = map.get_next_collided_tile_coords(obj.x, obj.y, obj.velocity_x, obj.w, obj.h);
@@ -60,9 +65,9 @@ static void TileMapCollisionHelper::update_with_world(TileMap &map, Object& obj)
 
 
 
-static bool TileMapCollisionHelper::ajacent_to_bottom_edge(TileMap &map, Object &obj)
+bool TileMapCollisionHelper::ajacent_to_bottom_edge(TileMap &map, Object &obj)
 {
-   std::vector<int2> tiles = TileMap::get_next_collided_tile_coords(obj.y, obj.x, 0.0004, obj.h, obj.w);
+   std::vector<int2> tiles = TileMapCollisionHelper::get_next_collided_tile_coords(obj.y, obj.x, 0.0004, obj.h, obj.w);
    if (tiles.empty()) return false;
 
    for (auto &t : tiles)
@@ -76,20 +81,20 @@ static bool TileMapCollisionHelper::ajacent_to_bottom_edge(TileMap &map, Object 
 
 
 
-static std::vector<int2> TileMapCollisionHelper::get_next_collided_tile_coords(float x, float y, float velocity, float depth_of_body, float length_of_edge)
+std::vector<int2> TileMapCollisionHelper::get_next_collided_tile_coords(float x, float y, float velocity, float depth_of_body, float length_of_edge)
    // returns the set of tile coordinates that will be collided with after the velocity is applied
 {
    std::vector<int2> collided_tiles;
 
    if (velocity > 0) x += depth_of_body;
 
-   int now = world_to_tile(x);
-   int next = world_to_tile(x + velocity);
+   int now = TileMap::world_to_tile(x);
+   int next = TileMap::world_to_tile(x + velocity);
 
    if (now != next)
    {
       // new tiles have been entered
-      int start_y = world_to_tile(y);
+      int start_y = TileMap::world_to_tile(y);
       float inset_y = fmod(y, 16.0);
       int num_tiles_along_edge = std::max(1, (int)ceil((length_of_edge + inset_y) / 16));
       collided_tiles.reserve(num_tiles_along_edge);

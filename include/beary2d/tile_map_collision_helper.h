@@ -5,11 +5,12 @@
 
 #include <vector>
 
+#include <beary2d/object.h>
+#include <beary2d/tile_map.h>
+#include <beary2d/globals.h>
 
 
 
-class TileMap;
-class Object;
 class int2;
 
 class TileMapCollisionHelper

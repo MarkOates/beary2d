@@ -4,6 +4,9 @@
 
 #include <beary2d/tile_map.h>
 
+#include <cmath>
+#include <beary2d/globals.h>
+
 
 
 
@@ -72,7 +75,7 @@ int TileMap::get_tile(int tile_x, int tile_y)
 
 
 
-static int TileMap::world_to_tile(float world_pos)
+int TileMap::world_to_tile(float world_pos)
 {
    return (int)(world_pos / 16);
 }
@@ -80,7 +83,7 @@ static int TileMap::world_to_tile(float world_pos)
 
 
 
-static int2 TileMap::world_to_tile_coords(float world_x, float world_y)
+int2 TileMap::world_to_tile_coords(float world_x, float world_y)
 {
    int2 result((int)(world_x / 16), (int)(world_y / 16));
    return result;
@@ -89,7 +92,7 @@ static int2 TileMap::world_to_tile_coords(float world_x, float world_y)
 
 
 
-static std::vector<int2> TileMap::get_next_collided_tile_coords(float x, float y, float velocity, float depth_of_body, float length_of_edge)
+std::vector<int2> TileMap::get_next_collided_tile_coords(float x, float y, float velocity, float depth_of_body, float length_of_edge)
    // returns the set of tile coordinates that will be collided with after the velocity is applied
 {
    std::vector<int2> collided_tiles;
