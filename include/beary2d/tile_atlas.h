@@ -33,8 +33,6 @@ public:
 	Tile *get_tile(int index);
 	int get_tile_width();
 	int get_tile_height();
-	void set_tile_height(int height);
-	void set_tile_width(int width);
 
 	void lock_bitmap();
 	void unlock_bitmap();

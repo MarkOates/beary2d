@@ -121,11 +121,6 @@ int TileAtlas::get_tile_width() { return tile_width; }
 
 int TileAtlas::get_tile_height() { return tile_height; }
 
-void TileAtlas::set_tile_height(int height) { tile_height = height; }
-
-void TileAtlas::set_tile_width(int width) { tile_width = width; }
-
-
 void TileAtlas::lock_bitmap()
 {
 	al_lock_bitmap(this->tile_atlas, ALLEGRO_PIXEL_FORMAT_ANY, ALLEGRO_LOCK_READONLY);
