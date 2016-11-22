@@ -24,16 +24,8 @@ struct int2
 public:
 	int x = 0;
 	int y = 0;
-	int2(int x, int y)
-		: x(x)
-		, y(y)
-	{}
-	void rotate()
-	{
-		int s = x;
-		x = y;
-		y = s;
-	}
+	int2(int x, int y);
+	void rotate();
 };
 
 

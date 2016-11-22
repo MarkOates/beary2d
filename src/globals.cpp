@@ -9,6 +9,25 @@
 
 
 
+
+int2::int2(int x, int y)
+   : x(x)
+   , y(y)
+{}
+
+
+
+
+void int2::rotate()
+{
+   int s = x;
+   x = y;
+   y = s;
+}
+
+
+
+
 namespace global
 {
 
