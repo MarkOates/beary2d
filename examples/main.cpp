@@ -32,33 +32,31 @@ public:
 				current_map->tile_layers.back().set_tile(x, y, random_int(0, 200));
 	}
 
-	float reposition_timer;
-	void reposition_camera()
+	void update_reposition_camera()
 	{
+	   static float reposition_timer = 0;
+		// update the camera's scale and rotation
+
 		// initiate motion with the camera
-		motion.cmove_to(&camera.placement.position.x, random_float(0, 40*21), 3, interpolator::double_slow_in_out);
-		motion.cmove_to(&camera.placement.position.y, random_float(0, 20*21), 3, interpolator::double_slow_in_out);
+		reposition_timer -= 1/60.0;
+		if (reposition_timer <= 0)
+		{
+			reposition_timer = 3;
+         motion.cmove_to(&camera.placement.position.x, random_float(0, 40*21), 3, interpolator::double_slow_in_out);
+         motion.cmove_to(&camera.placement.position.y, random_float(0, 20*21), 3, interpolator::double_slow_in_out);
+		}
+
+		camera.placement.scale.x = sin(al_get_time())*0.1 + 2;
+		camera.placement.scale.y = camera.placement.scale.x;
+		camera.placement.rotation = sin(al_get_time())*TAU * 0.03;
 	}
 
 	void primary_timer_func() override
 	{
 		motion.update(Framework::time_now);
 
+      update_reposition_camera();
 
-		// update the camera's scale and rotation
-		camera.placement.scale.x = sin(al_get_time())*0.1 + 2;
-		camera.placement.scale.y = camera.placement.scale.x;
-		camera.placement.rotation = sin(al_get_time())*TAU * 0.03;
-
-
-		reposition_timer -= 1/60.0;
-		if (reposition_timer <= 0)
-		{
-			reposition_timer = 3;
-			reposition_camera();
-		}
-
-		
 		NewWorldScreen::primary_timer_func();
 	}
 };
