@@ -2,11 +2,18 @@
 
 
 
-class Player : public Object
+#include <beary2d/beary2d.h>
+
+#include <allegro_flare/useful.h>
+
+
+
+
+class SimplePlayer : public Object
 {
 public:
 	int health;
-	Player()
+	SimplePlayer()
 		: health(3)
 	{ type=0; }
 };
@@ -28,7 +35,7 @@ class MyProject : public Screen
 {
 public:
 	TileMap map;
-	Player player;
+	SimplePlayer player;
 	std::vector<Object> objects;
 
 	std::vector<Object *> get_all_matching_type(std::vector<int> types_to_match)
@@ -39,6 +46,7 @@ public:
 			if (std::find(types_to_match.begin(), types_to_match.end(), obj.type) != types_to_match.end())
 				return_objects.push_back(&obj);
 		}
+      return return_objects;
 	}
 
 	MyProject(Display *display)
@@ -74,15 +82,15 @@ public:
 		//
 
 		//player.velocity_y += GRAVITY;
-		TileMapCollisions::update_with_world(map, player);
+		TileMapCollisionHelper::update_with_world(map, player);
 
 		for (Object &obj : objects)
-			TileMapCollisions::update_with_world(map, obj);
+			TileMapCollisionHelper::update_with_world(map, obj);
 
 		// test for player<->object collisions
 		for (int i=0; i<(int)objects.size(); i++)
 		{
-			TileMapCollisions::update_with_world(map, objects[i]);
+			TileMapCollisionHelper::update_with_world(map, objects[i]);
 			if (player.collides(objects[i]))
 			{
 				switch(objects[i].type)
@@ -126,11 +134,11 @@ public:
 		al_draw_filled_rounded_rectangle(player.x, player.y, player.x+player.w, player.y+player.h, 4, 4, color::orange);
 
 		// draw the hud
-		al_draw_textf(af::fonts["DroidSans.ttf 16"], color::black, 5, 5, 0, "Health: %d", player.health);
+		al_draw_textf(Framework::font("DroidSans.ttf 16"), color::black, 5, 5, 0, "Health: %d", player.health);
 	}
 	void key_down_func() override
 	{
-		switch(af::current_event->keyboard.keycode)
+		switch(Framework::current_event->keyboard.keycode)
 		{
 			case ALLEGRO_KEY_RIGHT: player.velocity_x = 2; break;
 			case ALLEGRO_KEY_LEFT: player.velocity_x = -2; break;
@@ -138,7 +146,7 @@ public:
 			/*
 			case ALLEGRO_KEY_UP:
 			{
-				if (TileMapCollisions::ajacent_to_bottom_edge(map, player))
+				if (TileMapCollisionHelper::ajacent_to_bottom_edge(map, player))
 					player.velocity_y = -8;
 				break;
 			}
@@ -148,7 +156,7 @@ public:
 	}
 	void key_up_func() override
 	{
-		switch(af::current_event->keyboard.keycode)
+		switch(Framework::current_event->keyboard.keycode)
 		{
 			case ALLEGRO_KEY_RIGHT: player.velocity_x = 0; break;
 			case ALLEGRO_KEY_LEFT: player.velocity_x = 0; break;
@@ -162,10 +170,11 @@ public:
 
 int main(int argc, char **argv)
 {
-	af::initialize();
-	Display *display = af::create_display();
+	Framework::initialize();
+	Display *display = Framework::create_display();
 	MyProject project(display);
-	af::run_loop();
+	Framework::run_loop();
+   return 0;
 }
 
 
