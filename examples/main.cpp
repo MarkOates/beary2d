@@ -52,7 +52,7 @@ public:
          motion.cmove_to(&camera.placement.position.y, random_float(0, 20*21), 3, interpolator::double_slow_in_out);
       }
 
-      camera.placement.scale.x = sin(al_get_time())*0.1 + 2;
+      camera.placement.scale.x = sin(al_get_time())*0.1 + 2 + 1;
       camera.placement.scale.y = camera.placement.scale.x;
       camera.placement.rotation = sin(al_get_time())*TAU * 0.03;
    }
