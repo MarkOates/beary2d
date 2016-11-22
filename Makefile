@@ -15,6 +15,8 @@ CORE_OBJ_FILES=$(CORE_ITEMS:%=obj/%.o)
 
 ALLEGRO_FLARE_DIR=/Users/markoates/Repos/allegro_flare
 
+ALLEGRO_LIBS=-lallegro_color -lallegro_font -lallegro_ttf -lallegro_dialog -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro_image -lallegro_main -lallegro
+
 
 
 #
@@ -47,7 +49,7 @@ EXAMPLE_OBJS=$(EXAMPLES:examples/%.cpp=bin/%.exe)
 examples: $(EXAMPLE_OBJS)
 
 bin/%.exe: examples/%.cpp lib/libbeary2d-$(BEARY2D_VER)
-	g++ -std=gnu++11 $< -o $@ -IE:/allegro_flare/include -I./include -IE:/allegro-5.1.11-mingw-edgar/include -LE:/beary2d/lib -lbeary2d-$(BEARY2D_VER) -LE:/allegro_flare/lib -lallegro_flare-0.8.6-mingw-4.8.1 -LE:/allegro-5.1.11-mingw-edgar/lib -lallegro_monolith-debug.dll
+	g++ -std=gnu++11 $< -o $@ -IE:/allegro_flare/include -I./include -IE:/allegro-5.1.11-mingw-edgar/include -LE:/beary2d/lib -lbeary2d-$(BEARY2D_VER) -LE:/allegro_flare/lib -lallegro_flare-0.8.6-mingw-4.8.1 -LE:/allegro-5.1.11-mingw-edgar/lib $(ALLEGRO_LIBS)
 
 
 
