@@ -21,8 +21,8 @@ public:
 	virtual void primary_timer_func() override; // <instead of joy_axis_func.  Joy axis func only moves on_change
 	void joy_down_func();
 	void joy_up_func();
-	void key_down_func();
-	virtual void joy_axis_func();
+	void key_down_func() override;
+	virtual void joy_axis_func() override;
 
 	void control_entity(Entity *entity_to_control);
 };
