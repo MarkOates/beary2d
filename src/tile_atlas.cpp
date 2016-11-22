@@ -140,19 +140,3 @@ int TileAtlas::get_tile_height()
 
 
 
-void TileAtlas::lock_bitmap()
-{
-   al_lock_bitmap(this->atlas_bitmap, ALLEGRO_PIXEL_FORMAT_ANY, ALLEGRO_LOCK_READONLY);
-}
-
-
-
-
-void TileAtlas::unlock_bitmap()
-{
-   al_unlock_bitmap(this->atlas_bitmap);
-}
-
-
-
-

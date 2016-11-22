@@ -28,9 +28,6 @@ public:
 
    int get_tile_width();
    int get_tile_height();
-
-   void lock_bitmap();
-   void unlock_bitmap();
 };
 
 
