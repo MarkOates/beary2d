@@ -1,5 +1,6 @@
 
 
+
 #include <beary2d/beary2d.h>
 
 #include <cmath>
@@ -26,6 +27,11 @@ public:
       tile_index.load_from_atlas(bitmaps["spritesheet.png"], 21, 21, 2, 2, 1, 1);
       current_map->tile_layers.push_back(TileLayer(&tile_index, 60, 60));
 
+      random_map_fill();
+   }
+
+   void random_map_fill()
+   {
       // fill our map with random tiles
       for (unsigned x=0; x<current_map->tile_layers.back().width; x++)
          for (unsigned y=0; y<current_map->tile_layers.back().height; y++)
