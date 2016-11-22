@@ -22,7 +22,7 @@ ALLEGRO_FLARE_DIR=/Users/markoates/Repos/allegro_flare
 #
 
 core: $(CORE_OBJ_FILES)
-	ar rvs lib/libbeary2d-$(BEARY2D_VER)-mingw-4.8.1.a $^
+	ar rvs lib/libbeary2d-$(BEARY2D_VER) $^
 
 $(CORE_OBJ_FILES): obj/%.o : src/%.cpp
 	g++ -c -std=gnu++11 -o obj/$(notdir $@) $< $(INCLUDE_FLAGS) -I$(ALLEGRO_FLARE_DIR)/include
@@ -46,8 +46,8 @@ EXAMPLE_OBJS=$(EXAMPLES:examples/%.cpp=bin/%.exe)
 
 examples: $(EXAMPLE_OBJS)
 
-bin/%.exe: examples/%.cpp lib/libbeary2d-$(BEARY2D_VER)-mingw-4.8.1.a
-	g++ -std=gnu++11 $< -o $@ -IE:/allegro_flare/include -I./include -IE:/allegro-5.1.11-mingw-edgar/include -LE:/beary2d/lib -lbeary2d-$(BEARY2D_VER)-mingw-4.8.1 -LE:/allegro_flare/lib -lallegro_flare-0.8.6-mingw-4.8.1 -LE:/allegro-5.1.11-mingw-edgar/lib -lallegro_monolith-debug.dll
+bin/%.exe: examples/%.cpp lib/libbeary2d-$(BEARY2D_VER)
+	g++ -std=gnu++11 $< -o $@ -IE:/allegro_flare/include -I./include -IE:/allegro-5.1.11-mingw-edgar/include -LE:/beary2d/lib -lbeary2d-$(BEARY2D_VER) -LE:/allegro_flare/lib -lallegro_flare-0.8.6-mingw-4.8.1 -LE:/allegro-5.1.11-mingw-edgar/lib -lallegro_monolith-debug.dll
 
 
 
