@@ -9,4 +9,5 @@ obj/*.obj
 
 allegro.log
 
-
+bin/main
+bin/walker
