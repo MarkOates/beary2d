@@ -1,5 +1,5 @@
-#ifndef __BEARY2D_TILE_INDEX_HEADER
-#define __BEARY2D_TILE_INDEX_HEADER
+#ifndef __BEARY2D_TILE_ATLAS_HEADER
+#define __BEARY2D_TILE_ATLAS_HEADER
 
 
 
@@ -10,7 +10,7 @@
 #include <beary2d/tile.h>
 #include <cstdint>
 
-class TileIndex
+class TileAtlas
 {
 private:
 	ALLEGRO_BITMAP *tile_atlas;	
@@ -19,7 +19,7 @@ private:
 public:
 	std::vector<Tile> tiles;
 
-	TileIndex();
+	TileAtlas();
 	void clear();
 
 	void load_from_atlas(ALLEGRO_BITMAP *tile_atlas, int tile_width, int tile_height, int margin_x, int margin_y, int spacing_x, int spacing_y);

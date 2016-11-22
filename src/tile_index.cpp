@@ -9,14 +9,14 @@
 
 
 
-TileIndex::TileIndex()
+TileAtlas::TileAtlas()
 	: tile_atlas(NULL)	
 	, tiles()
 	, tile_width(16)
 	, tile_height(16)
 {}
 
-void TileIndex::load_from_atlas(ALLEGRO_BITMAP *tile_atlas, int tile_width, int tile_height, int margin_x, int margin_y, int tile_padding_x, int tile_padding_y)
+void TileAtlas::load_from_atlas(ALLEGRO_BITMAP *tile_atlas, int tile_width, int tile_height, int margin_x, int margin_y, int tile_padding_x, int tile_padding_y)
 {
 	tiles.clear();
 
@@ -44,7 +44,7 @@ void TileIndex::load_from_atlas(ALLEGRO_BITMAP *tile_atlas, int tile_width, int 
 }
 
 
-bool TileIndex::export_atlas(std::string image_filename)
+bool TileAtlas::export_atlas(std::string image_filename)
 	// exports with no padding and no margins
 {
 	int num_cols = 8;
@@ -81,7 +81,7 @@ bool TileIndex::export_atlas(std::string image_filename)
 }
 
 
-Tile *TileIndex::set(int index, ALLEGRO_BITMAP *bitmap)
+Tile *TileAtlas::set(int index, ALLEGRO_BITMAP *bitmap)
 {
 	if ((int)tiles.size() <= index) tiles.resize((index+1), NULL);
 	else
@@ -95,7 +95,7 @@ Tile *TileIndex::set(int index, ALLEGRO_BITMAP *bitmap)
 }
 
 
-Tile *TileIndex::set(int index, ALLEGRO_BITMAP *bitmap, int64_t flags)
+Tile *TileAtlas::set(int index, ALLEGRO_BITMAP *bitmap, int64_t flags)
 {
 	if ((int)tiles.size() >= index) tiles.resize(index, NULL);
 	else
@@ -109,30 +109,30 @@ Tile *TileIndex::set(int index, ALLEGRO_BITMAP *bitmap, int64_t flags)
 }
 
 
-Tile *TileIndex::get_tile(int index)
+Tile *TileAtlas::get_tile(int index)
 {
 	//if (index < 0  || tiles.empty() || index >= (int)tiles.size()) return NULL; // want to avoid this at all costs
 	return &tiles[index];
 }
 
-void TileIndex::clear() { tiles.clear(); }
+void TileAtlas::clear() { tiles.clear(); }
 
-int TileIndex::get_tile_width() { return tile_width; }
+int TileAtlas::get_tile_width() { return tile_width; }
 
-int TileIndex::get_tile_height() { return tile_height; }
+int TileAtlas::get_tile_height() { return tile_height; }
 
-void TileIndex::set_tile_height(int height) { tile_height = height; }
+void TileAtlas::set_tile_height(int height) { tile_height = height; }
 
-void TileIndex::set_tile_width(int width) { tile_width = width; }
+void TileAtlas::set_tile_width(int width) { tile_width = width; }
 
 
-void TileIndex::lock_bitmap()
+void TileAtlas::lock_bitmap()
 {
 	al_lock_bitmap(this->tile_atlas, ALLEGRO_PIXEL_FORMAT_ANY, ALLEGRO_LOCK_READONLY);
 }
 
 
-void TileIndex::unlock_bitmap()
+void TileAtlas::unlock_bitmap()
 {
 	al_unlock_bitmap(this->tile_atlas);
 }

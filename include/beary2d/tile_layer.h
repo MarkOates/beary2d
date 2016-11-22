@@ -4,7 +4,7 @@
 
 
 
-class TileIndex;
+class TileAtlas;
 class Tile;
 class Camera2D;
 #include <vector>
@@ -12,11 +12,11 @@ class Camera2D;
 class TileLayer
 {
 public:
-	TileIndex *tile_index;
+	TileAtlas *tile_atlas;
 	int width, height;
 	std::vector<int> tiles;
 	
-	TileLayer(TileIndex *tile_index, int width, int height);
+	TileLayer(TileAtlas *tile_atlas, int width, int height);
 	
 	void resize(int new_width, int new_height, int default_value=0);
 	void set_tile(int tile_x, int tile_y, int tile);

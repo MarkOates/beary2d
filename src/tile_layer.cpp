@@ -13,8 +13,8 @@
 
 
 
-TileLayer::TileLayer(TileIndex *tile_index, int width, int height)
-	: tile_index(tile_index)
+TileLayer::TileLayer(TileAtlas *tile_atlas, int width, int height)
+	: tile_atlas(tile_atlas)
 	, width(width)
 	, height(height)
 	, tiles(width*height, 0)
@@ -62,10 +62,10 @@ int TileLayer::get_tile_bc(int tile_x, int tile_y)
 
 Tile *TileLayer::c_get_tile(float world_x, float world_y)
 {
-	if (!tile_index) return NULL;
-	int tile_x = world_x/tile_index->get_tile_width();
-	int tile_y = world_y/tile_index->get_tile_height();
-	return tile_index->get_tile(tiles[tile_x + tile_y * width]);
+	if (!tile_atlas) return NULL;
+	int tile_x = world_x/tile_atlas->get_tile_width();
+	int tile_y = world_y/tile_atlas->get_tile_height();
+	return tile_atlas->get_tile(tiles[tile_x + tile_y * width]);
 }
 
 bool TileLayer::draw()
@@ -87,7 +87,7 @@ void TileLayer::str_dump()
 
 bool TileLayer::draw(int tile_left, int tile_top, int tile_right, int tile_bottom)
 {
-	if (!tile_index || width==0 || height==0) return false;
+	if (!tile_atlas || width==0 || height==0) return false;
 
 	Tile *tile = NULL;
 
@@ -96,24 +96,24 @@ bool TileLayer::draw(int tile_left, int tile_top, int tile_right, int tile_botto
 	tile_right = std::min(tile_right, width-1);
 	tile_bottom = std::min(tile_bottom, height-1);
 
-	int tile_width = tile_index->get_tile_width();
-	int tile_height = tile_index->get_tile_height();
+	int tile_width = tile_atlas->get_tile_width();
+	int tile_height = tile_atlas->get_tile_height();
 	//std::cout << tile_width << "x" << tile_height << std::endl;
 
-	tile_index->lock_bitmap();
+	tile_atlas->lock_bitmap();
 	al_hold_bitmap_drawing(true);
 	for (int y=tile_top; y<=tile_bottom; y++)
 		for (int x=tile_left; x<=tile_right; x++)
 		{
 			int this_tile_index_num = get_tile(x, y);
-			if (this_tile_index_num == 0 || this_tile_index_num >= (int)tile_index->tiles.size()) continue;
+			if (this_tile_index_num == 0 || this_tile_index_num >= (int)tile_atlas->tiles.size()) continue;
 			//if (this_tile_index_num >= tile_index->tiles.size()) continue;
 			
-			tile = tile_index->get_tile(this_tile_index_num);
+			tile = tile_atlas->get_tile(this_tile_index_num);
 			if (tile && tile->bitmap) al_draw_bitmap(tile->bitmap, x*tile_width, y*tile_height, 0);
 		}
 	al_hold_bitmap_drawing(false);
-	tile_index->unlock_bitmap();
+	tile_atlas->unlock_bitmap();
 
 	return true;
 }
@@ -145,43 +145,43 @@ bool TileLayer::draw(Camera2D *camera)
 
 float TileLayer::get_left_edge(int tile_x)
 {
-	return tile_x * tile_index->get_tile_width();
+	return tile_x * tile_atlas->get_tile_width();
 }
 
 float TileLayer::get_top_edge(int tile_y)
 {
-	return tile_y * tile_index->get_tile_height();
+	return tile_y * tile_atlas->get_tile_height();
 }
 
 float TileLayer::get_right_edge(int tile_x)
 {
-	return tile_x * tile_index->get_tile_width() + tile_index->get_tile_width();
+	return tile_x * tile_atlas->get_tile_width() + tile_atlas->get_tile_width();
 }
 
 float TileLayer::get_bottom_edge(int tile_y)
 {
-	return tile_y * tile_index->get_tile_height() + tile_index->get_tile_height();
+	return tile_y * tile_atlas->get_tile_height() + tile_atlas->get_tile_height();
 }
 
 float TileLayer::get_center(int tile_x)
 {
-	return tile_x * tile_index->get_tile_width() + tile_index->get_tile_width() * 0.5;
+	return tile_x * tile_atlas->get_tile_width() + tile_atlas->get_tile_width() * 0.5;
 }
 
 float TileLayer::get_middle(int tile_y)
 {
-	return tile_y * tile_index->get_tile_height() + tile_index->get_tile_height() * 0.5;
+	return tile_y * tile_atlas->get_tile_height() + tile_atlas->get_tile_height() * 0.5;
 }
 
 
 int TileLayer::get_tile_col(float world_x)
 {
-	return limit<int>(0, width-1, (int)(world_x / tile_index->get_tile_width()));
+	return limit<int>(0, width-1, (int)(world_x / tile_atlas->get_tile_width()));
 }
 
 int TileLayer::get_tile_row(float world_y)
 {
-	return limit<int>(0, height-1, (int)(world_y / tile_index->get_tile_height()));
+	return limit<int>(0, height-1, (int)(world_y / tile_atlas->get_tile_height()));
 }
 
 void TileLayer::__build_a_basic_construct() {}
