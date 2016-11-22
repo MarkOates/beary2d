@@ -7,7 +7,7 @@
 #include <allegro_flare/camera2d.h>
 
 #include <beary2d/tile_layer.h>
-#include <beary2d/tile_index.h>
+#include <beary2d/tile_atlas.h>
 #include <beary2d/tile.h>
 
 
@@ -60,7 +60,7 @@ int TileLayer::get_tile_bc(int tile_x, int tile_y)
 	return tiles[index];
 }
 
-Tile *TileLayer::c_get_tile(float world_x, float world_y)
+ALLEGRO_BITMAP *TileLayer::c_get_tile(float world_x, float world_y)
 {
 	if (!tile_atlas) return NULL;
 	int tile_x = world_x/tile_atlas->get_tile_width();
@@ -89,8 +89,6 @@ bool TileLayer::draw(int tile_left, int tile_top, int tile_right, int tile_botto
 {
 	if (!tile_atlas || width==0 || height==0) return false;
 
-	Tile *tile = NULL;
-
 	tile_left = std::max(tile_left, 0);
 	tile_top = std::max(tile_top, 0);
 	tile_right = std::min(tile_right, width-1);
@@ -100,20 +98,18 @@ bool TileLayer::draw(int tile_left, int tile_top, int tile_right, int tile_botto
 	int tile_height = tile_atlas->get_tile_height();
 	//std::cout << tile_width << "x" << tile_height << std::endl;
 
-	tile_atlas->lock_bitmap();
 	al_hold_bitmap_drawing(true);
 	for (int y=tile_top; y<=tile_bottom; y++)
 		for (int x=tile_left; x<=tile_right; x++)
 		{
 			int this_tile_index_num = get_tile(x, y);
-			if (this_tile_index_num == 0 || this_tile_index_num >= (int)tile_atlas->tiles.size()) continue;
+			if (this_tile_index_num == 0 || this_tile_index_num >= (int)tile_atlas->get_num_tiles()) continue;
 			//if (this_tile_index_num >= tile_index->tiles.size()) continue;
 			
-			tile = tile_atlas->get_tile(this_tile_index_num);
-			if (tile && tile->bitmap) al_draw_bitmap(tile->bitmap, x*tile_width, y*tile_height, 0);
+			ALLEGRO_BITMAP *tile_bitmap = tile_atlas->get_tile(this_tile_index_num);
+			if (tile_bitmap) al_draw_bitmap(tile_bitmap, x*tile_width, y*tile_height, 0);
 		}
 	al_hold_bitmap_drawing(false);
-	tile_atlas->unlock_bitmap();
 
 	return true;
 }

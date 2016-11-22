@@ -7,6 +7,7 @@
 #include <beary2d/player.h>
 #include <beary2d/tile.h>
 #include <beary2d/tile_map_collision_helper.h>
+#include <beary2d/tile_atlas.h>
 #include <beary2d/tile_index.h>
 #include <beary2d/tile_layer.h>
 #include <beary2d/tile_map.h>

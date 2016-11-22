@@ -140,3 +140,11 @@ int TileAtlas::get_tile_height()
 
 
 
+int TileAtlas::get_num_tiles()
+{
+   return tile_bitmaps.size();
+}
+
+
+
+

@@ -28,6 +28,7 @@ public:
 
    int get_tile_width();
    int get_tile_height();
+   int get_num_tiles();
 };
 
 

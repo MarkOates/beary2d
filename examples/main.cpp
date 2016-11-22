@@ -24,7 +24,7 @@ public:
       current_map = new Map();
       level->maps.push_back(current_map);
 
-      tile_atlas.load_from_atlas(bitmaps["spritesheet.png"], 21, 21, 2, 2, 1, 1);
+      tile_atlas.load(bitmaps["spritesheet.png"], 21, 21, 2, 2, 1, 1);
       current_map->tile_layer = TileLayer(&tile_atlas, 60, 60);
 
       random_map_fill();

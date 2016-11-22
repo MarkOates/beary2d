@@ -7,6 +7,7 @@
 class TileAtlas;
 class Tile;
 class Camera2D;
+#include <allegro5/allegro.h>
 #include <vector>
 
 class TileLayer
@@ -22,7 +23,7 @@ public:
 	void set_tile(int tile_x, int tile_y, int tile);
 	int get_tile(int tile_x, int tile_y);
 	int get_tile_bc(int tile_x, int tile_y); // does a bounds check, returns -1 if out of bounds
-	Tile *c_get_tile(float world_x, float world_y);
+	ALLEGRO_BITMAP *c_get_tile(float world_x, float world_y);
 
 	// note!
 	// when using the draw() functions, the tile.at(0) will always be skipped.
