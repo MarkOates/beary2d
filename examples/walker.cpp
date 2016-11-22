@@ -134,7 +134,7 @@ public:
 		al_draw_filled_rounded_rectangle(player.x, player.y, player.x+player.w, player.y+player.h, 4, 4, color::orange);
 
 		// draw the hud
-		al_draw_textf(Framework::font("DroidSans.ttf 16"), color::black, 5, 5, 0, "Health: %d", player.health);
+		// al_draw_textf(Framework::font("DroidSans.ttf 16"), color::black, 5, 5, 0, "Health: %d", player.health);
 	}
 	void key_down_func() override
 	{
