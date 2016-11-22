@@ -37,6 +37,7 @@ public:
 	TileMap map;
 	SimplePlayer player;
 	std::vector<Object> objects;
+   Camera2D camera;
 
 	std::vector<Object *> get_all_matching_type(std::vector<int> types_to_match)
 	{
@@ -54,6 +55,7 @@ public:
 		, map()
 		, player()
 		, objects()
+      , camera(0, 0, display->width(), display->height())
 	{
 		map.resize(30, 20);
 		for (int y=0; y<map.get_height(); y++)
@@ -64,6 +66,8 @@ public:
 		player.y = random_float(30, 120);
 		player.w = 8;
 		player.h = 8;
+
+      camera.placement.scale = vec2d(2.0, 2.0);
 
 		objects.reserve(6);
 		for (int i=0; i<6; i++)
@@ -111,6 +115,8 @@ public:
 		// draw everything
 		//
 
+      camera.start_transform();
+
 		// draw the tile map
 		for (int y=0; y<map.get_height(); y++)
 			for (int x=0; x<map.get_width(); x++)
@@ -133,6 +139,7 @@ public:
 		// draw the player
 		al_draw_filled_rounded_rectangle(player.x, player.y, player.x+player.w, player.y+player.h, 4, 4, color::orange);
 
+      camera.restore_transform();
 		// draw the hud
 		// al_draw_textf(Framework::font("DroidSans.ttf 16"), color::black, 5, 5, 0, "Health: %d", player.health);
 	}
@@ -171,7 +178,7 @@ public:
 int main(int argc, char **argv)
 {
 	Framework::initialize();
-	Display *display = Framework::create_display();
+   Display *display = Framework::create_display(800*2, 600*2);
 	MyProject project(display);
 	Framework::run_loop();
    return 0;
