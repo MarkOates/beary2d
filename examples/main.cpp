@@ -11,19 +11,20 @@ class Project : public NewWorldScreen
 public:
 	BitmapBin bitmaps;
 	Motion motion;
+   TileIndex tile_index;
 
 	Project(Display *display, Player *player)
 		: NewWorldScreen(display, player)
 		, bitmaps("data")
 		, motion()
+      , tile_index()
 	{
 		level = new Level();
 		current_map = new Map();
 		level->maps.push_back(current_map);
 
-		TileIndex *tile_index = new TileIndex();
-		tile_index->load_from_atlas(bitmaps["spritesheet.png"], 21, 21, 2, 2, 1, 1);
-		current_map->tile_layers.push_back(TileLayer(tile_index, 60, 60));
+		tile_index.load_from_atlas(bitmaps["spritesheet.png"], 21, 21, 2, 2, 1, 1);
+		current_map->tile_layers.push_back(TileLayer(&tile_index, 60, 60));
 
 		// fill our map with random tiles
 		for (unsigned x=0; x<current_map->tile_layers.back().width; x++)
