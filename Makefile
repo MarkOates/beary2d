@@ -9,7 +9,7 @@ BEARY2D_VER=0.0.0
 
 INCLUDE_FLAGS=-IE:/allegro-5.1.11-mingw-edgar/include -IE:/allegro_flare/include -I./include
 
-CORE_ITEMS=bscreen entity entity_manager flare globals inventory level map motion_fx ms_background player tile tile_index tile_layer tile_map tile_map_collision_helper world_screen
+CORE_ITEMS=bscreen entity entity_manager flare globals inventory level map motion_fx ms_background object player tile tile_index tile_layer tile_map tile_map_collision_helper world_screen
 
 CORE_OBJ_FILES=$(CORE_ITEMS:%=obj/%.o)
 
