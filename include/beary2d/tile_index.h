@@ -24,8 +24,6 @@ public:
 
 	void load_from_atlas(ALLEGRO_BITMAP *tile_atlas, int tile_width, int tile_height, int margin_x, int margin_y, int spacing_x, int spacing_y);
 		// ^ used to be just "load"
-	void load_tile_definition_sheet(std::string definition_filename);
-		// ^ not implemented
 
 	bool export_atlas(std::string image_filename);
 
