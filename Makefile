@@ -17,7 +17,7 @@ CORE_OBJ_FILES=$(CORE_ITEMS:%=obj/%.o)
 ROOT_DIR=/Users/markoates/Repos
 ALLEGRO_FLARE_DIR=$(ROOT_DIR)/allegro_flare
 ALLEGRO_DIR=$(ROOT_DIR)/allegro5
-ALLEGRO_FLARE_LIB=allegro_flare-0.8.8wip
+ALLEGRO_FLARE_LIB=allegro_flare-0.8.9wip
 
 ALLEGRO_LIBS=-lallegro_color -lallegro_font -lallegro_ttf -lallegro_dialog -lallegro_audio -lallegro_acodec -lallegro_primitives -lallegro_image -lallegro_main -lallegro
 
